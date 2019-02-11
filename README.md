@@ -1,5 +1,3 @@
-README.md
-
 WPLASH
 AFRL Capstone Project
 AY 2019
