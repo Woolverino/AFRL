@@ -1,0 +1,46 @@
+int redLed = 11;
+int yellowLed = 12;
+int greenLed = 13;
+int buttonPin = 5;
+int ledState = 0;
+void setup() {
+  // put your setup code here, to run once:
+pinMode(redLed, OUTPUT);
+pinMode(yellowLed, OUTPUT);
+pinMode(greenLed, OUTPUT);
+pinMode(buttonPin, INPUT);
+Serial.begin(9600);
+}
+
+void loop(){
+if (digitalRead(buttonPin)==LOW){ // pin with internal pullup resistor, button closes to Gnd
+ledState = ledState +1;
+if (ledState == 4){ledState = 0;}  // reset to 1st state
+switch (ledState){
+case 0:
+digitalWrite (redLed, LOW);  // LEDs with anode to pin, cathode to resistor to Gnd
+digitalWrite (yellowLed, LOW);
+digitalWrite (greenLed, LOW);
+break;
+case 1:
+digitalWrite (redLed, LOW);
+digitalWrite (yellowLed, LOW);
+digitalWrite (greenLed, HIGH);
+Serial.println("green");
+break;
+case 2:
+digitalWrite (redLed, LOW);
+digitalWrite (yellowLed, HIGH);
+digitalWrite (greenLed, LOW);
+Serial.println("yellow");
+break;
+case 3:
+digitalWrite (redLed, HIGH);
+digitalWrite (yellowLed, LOW);
+digitalWrite (greenLed, LOW);
+Serial.println("red");
+break;
+} // end switch:case
+} // end detect button push
+delay (100); // pause for button debounce
+} // end loop
